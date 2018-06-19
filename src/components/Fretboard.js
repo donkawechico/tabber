@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import Fret from "./Fret";
+import FretString from "./FretString";
 
 class Fretboard extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
-        var frets = [];
-        for (var i = 0; i < 10; i++) {
-            frets.push(<Fret key={i} />);
+        var strings = [];
+        var numStrings = 4;
+        for (var i = 0; i < numStrings; i++) {
+            strings.push(<FretString key={i} stringNum={i} handleInput={this.props.handleInput}/>);
         }
-        return <div>{frets}</div>;
+        return <div>{strings}</div>;
     }
 }
 
