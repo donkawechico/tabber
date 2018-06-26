@@ -32,7 +32,7 @@ class App extends Component {
             <div>
                 <Fretboard handleInput={this.handleInput}/>
                 <TabView notes={this.state.notes}/>
-                <SavedTabsBox/>
+                <SavedTabsBox stateToSave={this.state}/>
             </div>
         );
     }
