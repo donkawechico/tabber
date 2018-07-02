@@ -12,8 +12,8 @@ class Fret extends Component {
 
     render() {
         return (
-            <button onClick={this.onClick}>
-                -{this.props.fretNum}-
+            <button onClick={this.onClick} className="fretButton">
+                {this.props.fretNum}
             </button>
         );
     }

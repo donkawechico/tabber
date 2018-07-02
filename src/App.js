@@ -9,7 +9,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.handleInput = this.handleInput.bind(this);
-        this.state = {lastNote: {}, notes: []};
+        this.handleSave = this.handleSave.bind(this);
+        this.handleLoad = this.handleLoad.bind(this);
+        this.state = {lastNote: {}, strings: ["E", "A", "D", "G"].reverse(), notes: [], savedTabs: []};
         this.noteId = 0;
     }
 
@@ -26,13 +28,29 @@ class App extends Component {
         });
     }
 
+    handleSave(saveName) {
+        this.setState({
+            savedTabs: [...this.state.savedTabs, {
+                name: saveName,
+                lastModified: new Date(),
+                notes: this.state.notes
+            }]
+        });
+    }
+
+    handleLoad(tabId) {
+        this.setState({
+            notes: this.state.savedTabs[tabId].notes
+        });
+    }
+
     render() {
         const lastNote = this.state.lastNote;
         return (
             <div>
-                <Fretboard handleInput={this.handleInput}/>
+                <Fretboard handleInput={this.handleInput} strings={this.state.strings}/>
                 <TabView notes={this.state.notes}/>
-                <SavedTabsBox stateToSave={this.state}/>
+                <SavedTabsBox currentTab={this.state.notes} savedTabs={this.state.savedTabs} handleSave={this.handleSave} handleLoad={this.handleLoad}/>
             </div>
         );
     }
