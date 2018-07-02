@@ -12,7 +12,7 @@ class Fretboard extends Component {
         for (var i = 0; i < numStrings; i++) {
             strings.push(<FretString key={i} stringNum={i} stringName={this.props.strings[i]} handleInput={this.props.handleInput}/>);
         }
-        return <div>{strings}</div>;
+        return <div className="fretboard">{strings}</div>;
     }
 }
 

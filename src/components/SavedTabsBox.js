@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
-import {Input, InputGroup, InputGroupAddon, Button, ListGroup, ListGroupItem} from 'reactstrap'
+import {Input, InputGroup, InputGroupAddon, Button, ListGroup} from 'reactstrap'
+import SavedTabsEntry from "./SavedTabsEntry";
 
 class SavedTabsBox extends Component {
     constructor(props) {
         super(props);
         this.onSave = this.onSave.bind(this);
-        this.onLoad = this.onLoad.bind(this);
         this.state = {
-            saveName: "",
-            tabToLoad: 0
+            saveName: ""
         };
     }
 
@@ -16,15 +15,10 @@ class SavedTabsBox extends Component {
         this.props.handleSave(this.state.saveName);
     }
 
-    onLoad(a) {
-        console.log(a);
-        this.props.handleLoad(this.state.tabToLoad);
-    }
-
     render() {
         var savedTabsListItems = [];
-        for (var i = 0; i < this.props.savedTabs.length; i++)  {
-            savedTabsListItems.push(<ListGroupItem tag="a" href="#" onClick={this.onLoad} tabId={i} key={i.toString()}>{this.props.savedTabs[i].name}</ListGroupItem>);
+        for (var i = 0; i < this.props.savedTabs.length; i++) {
+            savedTabsListItems.push(<SavedTabsEntry key={i.toString()} tabId={i} tabName={this.props.savedTabs[i].name} handleLoad={this.props.handleLoad}/>);
         }
         return <div>
             <InputGroup>
